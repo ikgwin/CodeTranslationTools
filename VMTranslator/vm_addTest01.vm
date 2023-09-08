@@ -1,0 +1,4 @@
+// Pushes the constants 7 and 5 onto the stack, then adds them
+push constant 7
+push constant 5
+add

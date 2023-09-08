@@ -1,0 +1,7 @@
+// push three constants
+push constant 5
+push constant 15
+push constant 25
+// pop the top value
+pop
+// top of the stack should now be 15

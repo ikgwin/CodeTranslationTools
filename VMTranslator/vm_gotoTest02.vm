@@ -1,0 +1,4 @@
+label END
+goto END
+push constant 10
+label END

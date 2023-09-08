@@ -1,0 +1,6 @@
+// push two constants, 50 and 100
+push constant 50
+push constant 100
+// add top two values on stack
+add
+// top of stack should be 150

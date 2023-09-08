@@ -1,0 +1,4 @@
+// Pops the top value from the stack and stores it in that 0
+pop that 0
+// Pops the next value from the stack and stores it in this 1
+pop this 1

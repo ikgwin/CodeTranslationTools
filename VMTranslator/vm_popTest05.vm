@@ -1,0 +1,5 @@
+// push one constant
+push constant 1
+// pop the top value
+pop
+// stack should now be empty

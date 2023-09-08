@@ -1,0 +1,4 @@
+// Pushes the constant 5 onto the stack
+push constant 5
+// Pushes the value in argument 2 onto the stack
+push argument 2

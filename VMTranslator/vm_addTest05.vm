@@ -1,0 +1,6 @@
+// push a positive and a negative constant
+push constant 30
+push constant -15
+// add top two values on the stack
+add
+// top of the stack should now be 15

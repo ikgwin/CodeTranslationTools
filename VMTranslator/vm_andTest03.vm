@@ -1,0 +1,4 @@
+// test case for AND operation with one value as 1 and another as 0
+push constant 1
+push constant 0
+and

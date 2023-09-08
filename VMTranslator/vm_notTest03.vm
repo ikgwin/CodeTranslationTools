@@ -1,0 +1,3 @@
+// test case for NOT operation with value as 100
+push constant 100
+not

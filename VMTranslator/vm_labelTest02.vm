@@ -1,0 +1,4 @@
+label LOOP_END
+push constant 5
+goto LOOP_END
+label LOOP_END

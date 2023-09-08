@@ -1,0 +1,2 @@
+label LOOP_START
+goto LOOP_START

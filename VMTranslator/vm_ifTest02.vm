@@ -1,0 +1,4 @@
+push constant 0
+if-goto FALSE
+push constant 1
+label FALSE

@@ -1,0 +1,5 @@
+// pushes the constant 7 onto the stack
+push constant 7
+
+// pushes the value in local 1 onto the stack
+push local 1
