@@ -1,3 +1,25 @@
+"""
+VMTranslator Module
+
+Description:
+This module translates VM commands into Hack assembly code. The VM language is a stack-based intermediate language that
+serves as an intermediate representation between high-level object-based language and the Hack machine language.
+
+The VMTranslator provides the following functionalities:
+1. Arithmetic and logical operations: Performs basic arithmetic (add, sub) and logical operations (neg, eq, gt, lt, or).
+2. Memory access commands: Manipulate the stack and the memory segments, including push and pop operations across different segments like constant, local, argument, this, that, pointer, temp, and static.
+3. Program control commands: Generates code for functions, call, and return commands, allowing for the program's flow to change as per function calls and returns.
+4. Branching commands: Generates assembly code to support VM branching commands like label, goto, and if-goto.
+
+In addition to the class, standalone functions provide additional functionality for certain VM commands. If executed as
+a standalone script, it reads VM commands from a file and writes the corresponding Hack assembly code to the standard
+output.
+
+Usage:
+To use the VMTranslator as a standalone script, run it with the path to the VM file as an argument:
+$ python VMTranslator.py path_to_vm_file.vm
+"""
+
 class VMTranslator:
 
 

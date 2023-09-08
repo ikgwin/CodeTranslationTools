@@ -1,3 +1,33 @@
+"""
+Hack Assembly Language Assembler
+
+This script assembles programs written in the Hack assembly language, converting them
+into binary machine code for execution on the Hack platform. The assembler performs 
+two main passes:
+
+1. First pass: Scans the assembly program and creates a symbol table associating 
+   each label and variable with its memory address.
+2. Second pass: Translates the assembly instructions into binary machine code using
+   the symbol table created during the first pass.
+
+The assembler supports:
+- A-instructions: for '@value' where value can be a symbol or a decimal number.
+- C-instructions: for 'dest=comp;jump' operations, providing flexibility in
+  choosing destination, computation, and jump condition fields.
+- L-instructions: for labels (pseudo-commands) used to specify a memory address
+  for use by subsequent A-instructions.
+
+It also uses predefined tables to translate symbolic instructions, destinations, 
+computations, and jump conditions into their respective binary representations.
+
+To use the assembler, run the script with a filename containing the Hack assembly 
+program as an argument. The resulting machine code will be printed to stdout.
+
+Example:
+    $ python assembler.py program.asm
+
+"""
+
 instruction_type = ['NULL','A_INSTRUCTION','C_INSTRUCTION','L_INSTRUCTION']
 
 instruction_dest = ['NULL','M','D','MD','A','AM','AD','AMD']

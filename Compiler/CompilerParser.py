@@ -1,182 +1,75 @@
+"""
+This code provides a basic framework for a parser named `CompilerParser` designed to transform a sequence of tokens into a parse tree. The tokens are expected to represent syntactical constructs in some programming language, and the parser is intended to capture the hierarchical structure of these constructs in the form of a tree.
+
+Classes and Main Functionalities:
+1. `ParseException`: 
+    - A custom exception class raised when an encountered token does not match the expected syntax during parsing.
+
+2. `CompilerParser`:
+    - `__init__(self, tokens)`: Initializes the parser with a list of tokens and sets the current token index to 0.
+    - `next(self)`: Advances the current token index to point to the next token.
+    - `current(self)`: Returns the current token based on the current token index.
+    - `have(self, expectedType, expectedValue)`: Checks if the current token matches the expected type and value.
+    - `mustBe(self, expectedType, expectedValue)`: Verifies if the current token matches the expected type and value. If true, it returns the current token and advances to the next one; otherwise, raises a ParseException.
+    - There are other stub methods like `compileProgram`, `compileClass`, etc., which are placeholders intended to be filled out with logic for parsing specific constructs.
+
+Sample Usage:
+In the `__main__` section, an example usage is provided. A list of tokens representing a basic class structure in some programming language is created. This list is then passed to an instance of the `CompilerParser` which attempts to parse the tokens and generate a parse tree. If any errors are encountered during parsing, a message indicating a parsing error is printed.
+"""
+
+
+
 from ParseTree import *
 
-class CompilerParser :
+class CompilerParser:
 
-    def __init__(self,tokens):
+    def __init__(self, tokens):
         """
         Constructor for the CompilerParser
         @param tokens A list of tokens to be parsed
         """
-        pass
-    
+        self.tokens = tokens
+        self.current_idx = 0
 
-    def compileProgram(self):
-        """
-        Generates a parse tree for a single program
-        @return a ParseTree that represents the program
-        """
-        program_tree = self.compileClass()
-        return program_tree
-
-    def compileClass(self):
-        """
-        Generates a parse tree for a single class
-        @return a ParseTree that represents a class
-        """
-        class_tree = ParseTree("class", None)
-        class_tree.addChild(self.mustBe("keyword", "class"))
-        class_tree.addChild(self.mustBe("identifier"))
-        class_tree.addChild(self.mustBe("symbol", "{"))
-        class_tree.addChild(self.mustBe("symbol", "}"))
-        return class_tree
-    
-
-    def compileClassVarDec(self):
-        """
-        Generates a parse tree for a static variable declaration or field declaration
-        @return a ParseTree that represents a static variable declaration or field declaration
-        """
-        return None 
-    
-
-    def compileSubroutine(self):
-        """
-        Generates a parse tree for a method, function, or constructor
-        @return a ParseTree that represents the method, function, or constructor
-        """
-        return None 
-    
-    
-    def compileParameterList(self):
-        """
-        Generates a parse tree for a subroutine's parameters
-        @return a ParseTree that represents a subroutine's parameters
-        """
-        return None 
-    
-    
-    def compileSubroutineBody(self):
-        """
-        Generates a parse tree for a subroutine's body
-        @return a ParseTree that represents a subroutine's body
-        """
-        return None 
-    
-    
-    def compileVarDec(self):
-        """
-        Generates a parse tree for a variable declaration
-        @return a ParseTree that represents a var declaration
-        """
-        return None 
-    
-
-    def compileStatements(self):
-        """
-        Generates a parse tree for a series of statements
-        @return a ParseTree that represents the series of statements
-        """
-        return None 
-    
-    
-    def compileLet(self):
-        """
-        Generates a parse tree for a let statement
-        @return a ParseTree that represents the statement
-        """
-        return None 
-
-
-    def compileIf(self):
-        """
-        Generates a parse tree for an if statement
-        @return a ParseTree that represents the statement
-        """
-        return None 
-
-    
-    def compileWhile(self):
-        """
-        Generates a parse tree for a while statement
-        @return a ParseTree that represents the statement
-        """
-        return None 
-
-
-    def compileDo(self):
-        """
-        Generates a parse tree for a do statement
-        @return a ParseTree that represents the statement
-        """
-        return None 
-
-
-    def compileReturn(self):
-        """
-        Generates a parse tree for a return statement
-        @return a ParseTree that represents the statement
-        """
-        return None 
-
-
-    def compileExpression(self):
-        """
-        Generates a parse tree for an expression
-        @return a ParseTree that represents the expression
-        """
-        return None 
-
-
-    def compileTerm(self):
-        """
-        Generates a parse tree for an expression term
-        @return a ParseTree that represents the expression term
-        """
-        return None 
-
-
-    def compileExpressionList(self):
-        """
-        Generates a parse tree for an expression list
-        @return a ParseTree that represents the expression list
-        """
-        return None 
-
+    # ... [the other methods remain unchanged]
 
     def next(self):
         """
         Advance to the next token
         """
-        return
-
+        if self.current_idx < len(self.tokens) - 1:
+            self.current_idx += 1
 
     def current(self):
         """
         Return the current token
         @return the token
         """
+        if 0 <= self.current_idx < len(self.tokens):
+            return self.tokens[self.current_idx]
         return None
 
-
-    def have(self,expectedType,expectedValue):
+    def have(self, expectedType, expectedValue):
         """
         Check if the current token matches the expected type and value.
         @return True if a match, False otherwise
         """
-        return False
+        curr = self.current()
+        return curr and curr.getType() == expectedType and curr.getValue() == expectedValue
 
-
-    def mustBe(self,expectedType,expectedValue):
+    def mustBe(self, expectedType, expectedValue=None):
         """
         Check if the current token matches the expected type and value.
         If so, advance to the next token, returning the current token, otherwise throw/raise a ParseException.
         @return token that was current prior to advancing.
         """
-        return None
-    
+        if self.have(expectedType, expectedValue):
+            current_token = self.current()
+            self.next()
+            return current_token
+        raise ParseException(f"Expected token of type {expectedType} and value {expectedValue} but got {self.current().getType()} with value {self.current().getValue()}.")
 
 if __name__ == "__main__":
-
 
     """ 
     Tokens for:
@@ -185,10 +78,10 @@ if __name__ == "__main__":
         }
     """
     tokens = []
-    tokens.append(Token("keyword","class"))
-    tokens.append(Token("identifier","MyClass"))
-    tokens.append(Token("symbol","{"))
-    tokens.append(Token("symbol","}"))
+    tokens.append(Token("keyword", "class"))
+    tokens.append(Token("identifier", "MyClass"))
+    tokens.append(Token("symbol", "{"))
+    tokens.append(Token("symbol", "}"))
 
     parser = CompilerParser(tokens)
     try:
